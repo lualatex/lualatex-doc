@@ -36,7 +36,6 @@
 \vspace*{\stretch{2}}
 \clearpage
 
-
 \section{Introduction}\label{intro}
 
 \subsection{Just what is \lualatex?}\label{what}
@@ -151,6 +150,7 @@ There are only three differences:
 \begin{enumerate}
   \item Don't load \pf{inputenc}, just encode your source in UTF-8.
   \item Don't load \pf{fontenc} nor \pf{textcomp}, but load \pf{fontspec}.
+  \item \pf{babel} works with \lualatex{} but you can load \pf{polyglossia} instead.
   \item Don't use any package that changes the fonts, but use \pf{fontspec}'s
     commands instead.
 \end{enumerate}
@@ -216,7 +216,7 @@ Depending on your programming culture, you may be directly interested in the
 rest of part~1 and part~2 which present more advanced features of the
 language, but part~4 is useless in a \luatex context, unless of course you
 want to hack \luatex itself. Finally, the \emph{Lua reference manual} is
-\href{http://www.lua.org/manual/}{available online in various languages} and
+\href{http://www.lua.org/manual/5.2/}{available online} and
 comes with a handy index.
 
 \medskip
@@ -344,7 +344,7 @@ remains ©\luatexversion©. The rationale is detailed in section~\ref{formats}.
 \medskip
 
 Oh, and by the way, did I mention that \luatex is in beta and version 1.0 is
-expected in late 2012? You can learn more on the roadmap page of
+expected in spring 2014? You can learn more on the roadmap page of
 \href{http://luatex.org/}{the \luatex site}. Stable betas are released
 regularly and are included in \texlive since 2008 and \miktex since 2.9.
 
@@ -360,7 +360,6 @@ written or updated, without keeping track of changes. Hopefully, you'll update
 your distribution as a whole so that you always get matching versions of this
 guide and the packages, formats and engine it describes.
 
-
 \section{Essential packages and practices}\label{essential}
 
 This section presents the packages you'll probably want to always load as a
@@ -372,6 +371,10 @@ user, or that you should absolutely know about as a developer.
   macros/latex/contrib/fontspec/}[https://github.com/wspr/fontspec/]
 Nice interface to font management, well-integrated in to the \latex font
 selection scheme. Already presented in the previous section.
+
+\pkdesc{polyglossia}{\FC \& \AR}{\xetex, \luatex}{\latex}{%
+  macros/latex/contrib/polyglossia/}[https://github.com/reutenauer/polyglossia/]
+A simple and modern replacement for Babel, working in synergy with \pk{fontspec}.
 
 \subsection{Developer-level}
 
@@ -388,14 +391,13 @@ unique prefix for internal macros in all of your packages, aren't you?
 
 On the Lua end, please keep the global namespace as clean as possible. That
 is, use a table ©mypackage© and put all your public functions and objects in
-this table. You might want to use Lua's
-\href{http://www.lua.org/manual/5.1/manual.html#pdf-module} {\code{module()}}.
+this table. You might want to avoid using Lua's deprecated \code{module()}.
 Other strategies for Lua module management are discussed in
 \href{http://www.lua.org/pil/15.html} {chapter~15 of \emph{Programming in
-    Lua}}.  Also, it is probably a good idea to use ©local© for your internal
-variables and functions. Finally, to avoid clashes with future versions of
-\luatex, it is recommended to avoid modifying the namespaces of \luatex's
-default libraries.
+    Lua}}, and examples are given in \file{luatexbase-modutils.pdf}.  Also, it
+is a good and necessary practice to use ©local© for your internal variables and
+functions. Finally, to avoid clashes with future versions of \luatex, it is
+necessary to avoid modifying the namespaces of \luatex's default libraries.
 
 \subsubsection{Engine and mode detection}\label{detect}
 
@@ -425,8 +427,8 @@ that this doesn't include \xetex, whose support for PDF is different).
 
 \subsubsection{Basic resources}
 
-\pkdesc{luatexbase}{\ER \& \MPG}{\luatex}{\latex, Plain}{%
-  macros/luatex/generic/luatexbase/}[https://github.com/mpg/luatexbase]
+\pkdesc{luatexbase}{\ER, \MPG \& \PHG}{\luatex}{\latex, Plain}{%
+  macros/luatex/generic/luatexbase/}[https://github.com/lualatex/luatexbase]
 The Plain and \latex formats provide macros to manage \tex basic resources,
 such as count or box registers. \luatex introduces new resources that need to
 be shared gracefully by packages. This package provides the basic tools to
@@ -444,8 +446,8 @@ packages in the near future, though the timeline is not clear.
 See the description of \pk{luatexbase} above. This package provides the same
 core features except for callback management and Lua module identification.
 
-\pkdesc{lualibs}{\ER}{\luatex}{Lua}{%
-  macros/luatex/generic/lualibs/}[https://github.com/mpg/lualibs]
+\pkdesc{lualibs}{\ER \& \PHG}{\luatex}{Lua}{%
+  macros/luatex/generic/lualibs/}[https://github.com/lualatex/lualibs]
 Collection of Lua libraries and additions to the standard libraries; mostly
 derived from the \context libraries. If you need a basic function that Lua
 doesn't provide, check this package before rolling your own implementation.
@@ -456,8 +458,8 @@ Those packages are loaded by \pk{fontspec} to handle some low-level font and
 encoding issues. A normal user should only use \pk{fontspec}, but a developer
 may need to know about them.
 
-\pkdesc{luaotfload}{\ER \& \KH}{\luatex}{\latex, Plain}{%
-  macros/luatex/generic/luaotfload/}[https://github.com/khaledhosny/luaotfload]
+\pkdesc{luaotfload}{\ER, \KH \& \PHG}{\luatex}{\latex, Plain}{%
+  macros/luatex/generic/luaotfload/}[https://github.com/lualatex/luaotfload]
 Low-level OpenType font loading, adapted from the generic subset of \context.
 Basically, it uses the ©fontloader© Lua library and the appropriate callbacks
 to implement a syntax for the ©\font© primitive very similar to that of \xetex
@@ -480,7 +482,6 @@ doesn't provide definitions for LICR macros; this is done by loading
 have distinct names so that different \file{fd} files can be used according to
 the engine (which is actually the case with Latin Modern).
 
-
 \section{Other packages}\label{other}
 
 Note that the packages are not listed in any particular order.
@@ -488,25 +489,25 @@ Note that the packages are not listed in any particular order.
 \subsection{User-level}
 
 \pkdesc{luatextra}{\ER \& \MPG}{\luatex}{\latex}{%
-  macros/luatex/latex/luatextra/}[https://github.com/mpg/luatextra]
+  macros/luatex/latex/luatextra/}[https://github.com/lualatex/luatextra]
 Loads usual packages, currently \pk{fontspec}, \pk{luacode}, \pf{metalogo}
 (commands for logos, including ©\LuaTeX© and ©\LuaLaTeX©), \pk{luatexbase},
 \pk{lualibs}, \pf{fixltx2e} (fixes and enhancements for the \latex core).
 
 \pkdesc{luacode}{\MPG}{\luatex}{\latex}{%
-  macros/luatex/latex/luacode/}[https://github.com/mpg/luacode]
+  macros/luatex/latex/luacode/}[https://github.com/lualatex/luacode]
 Provides commands and macros that help including Lua code in a \tex source,
 especially concerning special characters.
 
 \pkdesc{luainputenc}{\ER \& \MPG}{\luatex, \xetex, \pdftex}{\latex}{%
-  macros/luatex/latex/luainputenc/}[https://github.com/mpg/luainputenc]
+  macros/luatex/latex/luainputenc/}[https://github.com/lualatex/luainputenc]
 Helps compiling documents relying on legacy encodings (either in the source or
 with the fonts). Already presented in the introduction. When running \xetex,
 just loads \pf{xetex-inputenc}; under \pdftex, loads the standard
 \pf{inputenc}.
 
-\pkdesc{luamplib}{\HH, \Taco \& \ER}{\luatex}{\latex, Plain}{%
-  macros/luatex/generic/luamplib/}[https://github.com/mpg/luamplib]
+\pkdesc{luamplib}{\HH, \Taco \& \PHG}{\luatex}{\latex, Plain}{%
+  macros/luatex/generic/luamplib/}[https://github.com/lualatex/luamplib]
 Provides a nice interface for the ©mplib© Lua library that embeds metapost in
 \luatex.
 
@@ -515,11 +516,6 @@ Provides a nice interface for the ©mplib© Lua library that embeds metapost in
 Changes low-level color implementation to use \luatex attributes in place of
 whatsits. This makes the implementation more robust and fixes strange bugs
 such as wrong alignment when ©\color© happens at the beginning of a ©\vbox©.
-
-\pkdesc{luadirections}{\KH}{\luatex}{\latex, Plain, \context}{}
-[https://github.com/khaledhosny/luadirections]
-Higher-level interface to \luatex's multi-directional support. Currently not
-released on CTAN.
 
 \subsection{Developer-level}
 
@@ -537,12 +533,11 @@ types, etc. used internally by \tex and its successors. Under \luatex, a more
 efficient implementation is used and a Lua interface is provided.
 
 \pkdesc{lua-alt-getopt}{Aleksey Cheusov}{\cmd{texlua}}{command-line}{%
-  support/lua/lua-alt-getopt}[http://luaforge.net/project/lua_altgetopt]
+  support/lua/lua-alt-getopt}[https://github.com/LuaDist/alt-getopt]
 Command-line option parser, mostly compatible with POSIX and GNU getopt, to be
 used in command-line Lua scripts such as \cmd{mkluatexfontdb} from
 \pk{luaotfload}.
 
-
 \section{The \cmd{luatex} and \cmd{lualatex} formats}\label{formats}
 
 This section is for developers and curious users only; normal users can safely
@@ -593,11 +588,6 @@ implements this for the \cmd{lualatex} format, is:
           maybe prefixing was not necessary/desirable for them. However, we
           tried to make the prefixing rule as simple as possible, so that
           the previous point doesn't get even worse.
-        \item The final name of some primitive may sound strange, namely those
-          already containing the name of an engine, such as
-          ©\luatexOmegaVersion©.  However, since \luatex is not a drop-in
-          replacement for Omega/Aleph, we felt it wrong to provide
-          ©\OmegaVersion©.
         \item Maybe some day we'll feel it's better to provide all primitives
           without prefixing. If this happens, it will be easy to add the
           unprefixed primitives in the format while keeping the prefixed names
@@ -631,11 +621,9 @@ on the \luatex mailing lists, and \file{lualatexquotejobname.tex} for the
 implementation of the workaround.
 
 \para{hyphenation}
-\luatex offers dynamic loading for hyphenation patterns. There is currently no
-support for this in \pf{babel} but some files have been modified to provide
-semi-dynamic loading, to achieve a better loading time of the format. This is
-only an implementation change, nothing should be visible at the user level.
-A modified pattern loading scheme is used for Plain-based formats too.
+\luatex offers dynamic loading for hyphenation patterns. The support for this in
+\pf{babel} and \pf{polyglossia} appeared only on \texlive 2013, but should
+work well since then.
 
 Documentation and implementation details are included in
 \file{luatex-hyphen.pdf}. The sources are part of the
@@ -676,7 +664,7 @@ The bad news is, this isn't always true. See the next section for details.
 
 \para{microtype}
 Package \pf{microtype} has limited support for \luatex: more precisely, as of
-version 2.4 2010/01/10, protrusion and expansion are available and activated
+version 2.5 2013/03/13, protrusion and expansion are available and activated
 by default in PDF mode, but kerning, spacing and tracking are not supported
 (see table~1 in section~3.1 of \file{microtype.pdf}).
 
@@ -722,16 +710,12 @@ such a problem.
 \para{babel}
 Mostly working mostly without problems for Latin languages. For other
 languages, your mileage may vary. Even for Latin languages, encoding-related
-problems my happen. For example, in French, commands for French guillemots
-didn't work properly with \pf{frenchb} 2.3d, but do the right thing with 2.5b
-(not yet on CTAN, but available on the \href
-{http://daniel.flipo.free.fr/frenchb/index.html} {author's page}).
+problems my happen.
 
+\para{polyglossia}
 A more modern, but less complete, package for multilingual support,
-\pf{polyglossia} is available for \xelatex but is not ported to \lualatex yet.
-If you known more about what precisely works or not with \pf{babel} or what
-can be expected to work better or not with \pf{polyglossia} once it's ported,
-please let me know so that I can enhance this paragraph.
+\pf{polyglossia}, is also available and should be preffered, though it does
+not support all \pf{babel} features yet.
 
 \subsection{Not working (yet)}\label{notworking}
 
@@ -744,11 +728,6 @@ packages were trying to solve, so you most likely don't need these packages
 anyway. However, not everything is already ported to the shiny new world of
 Unicode, so you may have a more limited (or just different) set of choices
 available for some time (this is especially true for fonts).
-
-\para{soul} The \pf{soul} package uses a clever trick with a monospaced font
-to count characters. However, due to differences in font handling (and maybe a
-bug in \luatex), this doesn't work yet with character above 256 (that is,
-outside the Latin-1 set).
 
 \para{spaces} Spaces in file names are not really well supported in the \tex
 world in general. This doesn't really get better with \luatex. Also, due to
