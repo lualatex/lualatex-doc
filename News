@@ -1,3 +1,7 @@
+2013/05/10 (Elie Roux)
+    * update for the large changes appearing in TeXLive 2013 and
+      for Lua 5.2.
+
 2010/11/11
     * fix a lot of typos, thanks to all readers
     * add a paragraph about hyphenation and other metric changes, with

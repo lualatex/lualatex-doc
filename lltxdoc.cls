@@ -97,6 +97,9 @@
 \newcommand \VK   {Vafa Khalighi\xspace}
 \newcommand \HH   {Hans Hagen\xspace}
 \newcommand \Taco {Taco Hoewater\xspace}
+\newcommand \FC   {François Charette\xspace}
+\newcommand \PHG  {Philipp Gesang\xspace}
+\newcommand \AR   {Arthur Reuntenauer\xspace}
 
 \newenvironment{myquote}{%
   \list{}{\leftmargin0pt \rightmargin1em}%
