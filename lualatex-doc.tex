@@ -194,7 +194,7 @@ superior that this one hardly counts). The package \pk{luainputenc} provides
 various trade-offs that allow you to regain these parts\footnote{While the
   name suggests it is only about input encodings, the details of \latex's font
   encoding implementation imply this package is needed (and works) for old
-  fonts too.} possibly at the expense of loosing real Unicode support.
+  fonts too.} possibly at the expense of losing real Unicode support.
 
 That's all you need to know to start producing documents with \lualatex. I
 recommend you have a look at the \pf{fontspec} manual and actually try to
@@ -332,13 +332,13 @@ read the next section.
 
 Just in case it isn't obvious, the \luatex manual, \file{luatexref-t.pdf}, is
 a great source of information about \luatex and you'll probably want to
-consult it at some point (though it is a bit arid and technical).
+consult it at some point (though it is a bit dry and technical).
 
 It is important to know that the name of the new primitives of \luatex as you
 read them in the manual are not the actual names you'll be able to use in
 \lualatex. To prevent clashes with existing macro names, all new primitives
 have been prefixed with ©\luatex© unless they already start with it, so
-©\luaescapestring© becomes ©\luatexluaescapetring© while ©\luatexversion©
+©\luaescapestring© becomes ©\luatexluaescapestring© while ©\luatexversion©
 remains ©\luatexversion©. The rationale is detailed in section~\ref{formats}.
 
 \medskip
@@ -535,7 +535,7 @@ efficient implementation is used and a Lua interface is provided.
 \pkdesc{lua-alt-getopt}{Aleksey Cheusov}{\cmd{texlua}}{command-line}{%
   support/lua/lua-alt-getopt}[https://github.com/LuaDist/alt-getopt]
 Command-line option parser, mostly compatible with POSIX and GNU getopt, to be
-used in command-line Lua scripts such as \cmd{mkluatexfontdb} from
+used in command-line Lua scripts such as \cmd{luaotfload-tool} from
 \pk{luaotfload}.
 
 \section{The \cmd{luatex} and \cmd{lualatex} formats}\label{formats}
@@ -708,13 +708,13 @@ involved. As usual, make sure your distribution is up-to-date before reporting
 such a problem.
 
 \para{babel}
-Mostly working mostly without problems for Latin languages. For other
-languages, your mileage may vary. Even for Latin languages, encoding-related
-problems my happen.
+Mostly working without problems for languages based on Latin script.
+For other languages, your mileage may vary. Even for Latin languages,
+encoding-related problems my happen.
 
 \para{polyglossia}
 A more modern, but less complete, package for multilingual support,
-\pf{polyglossia}, is also available and should be preffered, though it does
+\pf{polyglossia}, is also available and should be preferred, though it does
 not support all \pf{babel} features yet.
 
 \subsection{Not working (yet)}\label{notworking}
