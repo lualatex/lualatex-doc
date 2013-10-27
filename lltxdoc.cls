@@ -28,7 +28,7 @@
 \providecommand \ConTeXt    {Con\TeX{}t}
 \providecommand \pdfTeX     {pdf\TeX}
 \providecommand \TeXLive    {\TeX\thinspace Live}
-\providecommand \MiKTeX     {Mik\TeX}
+\providecommand \MiKTeX     {MiK\TeX}
 
 \simplelogo {TeX}
 \simplelogo {LaTeX}
