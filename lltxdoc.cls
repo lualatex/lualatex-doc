@@ -28,7 +28,7 @@
 \providecommand \ConTeXt    {Con\TeX{}t}
 \providecommand \pdfTeX     {pdf\TeX}
 \providecommand \TeXLive    {\TeX\thinspace Live}
-\providecommand \MiKTeX     {Mik\TeX}
+\providecommand \MiKTeX     {MiK\TeX}
 
 \simplelogo {TeX}
 \simplelogo {LaTeX}
@@ -96,10 +96,10 @@
 \newcommand \MPG  {Manuel Pégourié-Gonnard\xspace}
 \newcommand \VK   {Vafa Khalighi\xspace}
 \newcommand \HH   {Hans Hagen\xspace}
-\newcommand \Taco {Taco Hoewater\xspace}
+\newcommand \Taco {Taco Hoekwater\xspace}
 \newcommand \FC   {François Charette\xspace}
 \newcommand \PHG  {Philipp Gesang\xspace}
-\newcommand \AR   {Arthur Reuntenauer\xspace}
+\newcommand \AR   {Arthur Reutenauer\xspace}
 
 \newenvironment{myquote}{%
   \list{}{\leftmargin0pt \rightmargin1em}%
