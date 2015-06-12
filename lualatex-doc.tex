@@ -63,7 +63,7 @@ powerful engines so that other people can implement even more powerful formats
 \pdftex, \xetex and \luatex.
 
 To further complicate the picture, the original \tex engine produced only DVI
-files, while its successors may (also) produce PDF file.  Each command in your
+files, while its successors may (also) produce PDF files.  Each command in your
 system corresponds to a particular engine with a particular format and a
 particular output mode. The following table summarizes this: rows are indexed
 by format, columns by engine, and in each cell the first line is the command
@@ -104,7 +104,7 @@ We can now answer the title question: \lualatex is the \luatex engine with the
 As you probably know, \latex is the general framework
 in which documents begin with ©\documentclass©, packages are loaded with
 ©\usepackage©, fonts are selected in a clever way (so that you can switch to
-boldface while preserving italics), pages are build with complicated
+boldface while preserving italics), pages are built with complicated
 algorithms
 including support for headers, footers, footnotes, margin notes, floating
 material, etc. This mostly doesn't change with \lualatex, but new and more
@@ -132,7 +132,7 @@ typographic algorithms. The main new features of \luatex are:
       \item ©mplib©, an embedded version of the graphic program MetaPost;
       \item ©callback©, providing hooks into parts of the \tex engine that
         were previously inaccessible to the programmer;
-      \item utility libraries for manipulating images, pdf files, etc.
+      \item utility libraries for manipulating images, PDF files, etc.
     \end{itemize}
 \end{enumerate}
 Some of these features, such as Unicode support, directly impact all
@@ -165,16 +165,16 @@ example ©Latin Modern Roman© rather than ©ec-lmr10©. You probably want to us
 The good news is: you can directly access any font on your operating system
 (in addition to those of your \tex distribution) including TrueType and
 OpenType fonts and have access to their most advanced features. It means it
-is now easy to install for use with \lualatex any modern font you may download
-or purchase from an editor and benefit from their full potential.
+is now easy to install any modern font you may download or purchase from an
+editor and benefit from their full potential in \lualatex.
 
 Now for the bad news: it is not always easy to get a list of all available
 fonts. Under Windows with \texlive, the command-line tool \cmd{fc-list} lists
 them all, but is not very friendly. Under Mac OS X, the \emph{Fontbook}
 application lists the fonts of your system, but not those of your \tex
 distribution. Same with \cmd{fc-list} on Linux. More bad news: it is not easy
-to access your old fonts that way. Happily, more fonts are available in modern
-formats every day (well, month or year, actually, if you count only good
+to access your old fonts that way. Luckily, more fonts are available in modern
+formats every day (well, month or year, actually, if you only count good
 fonts).
 
 \emph{En passant}, let's mention that the content of this section so far also
@@ -232,7 +232,7 @@ argument. Conversely, you can pass information from Lua to \tex with
 prints ``the standard  approximation $\pi = \directlua{tex.sprint(math.pi)}$''
 in your document. See how easy it is to mix \tex and Lua?
 
-Actually, there are a few gotchas. Let's look at the Lua to \tex way first,
+Actually, there are a few gotchas. Let's look at the Lua-to-\tex way first;
 it's the simplest (since it's more Lua than \tex). If you look at the \luatex
 manual, you'll see there is another function with a simpler name, ©tex.print©,
 to pass information this way. It works by virtually inserting a full line into
@@ -243,7 +243,7 @@ your \tex source, whose contents are its argument. In case you didn't know,
 ignoring spaces at the beginning and end of line and appending an end-of-line
 character. Most of the time, you don't want this to happen, so I recommend
 using ©tex.sprint© which virtually inserts its argument in the current line,
-so is much more predictable.
+so it's much more predictable.
 
 If you're enough of a \tex{}nician to know about catcodes, you'll be happy to
 know that ©tex.print© and its variants give you nearly full control over the
@@ -265,7 +265,7 @@ sane, but always good to know.)
 Now, the major gotcha is that before being fed to the Lua interpreter, the
 argument is first read and tokenised by \tex, then fully expanded and turned
 back into a plain string. Being read by \tex has several consequences. One of
-them is that end of lines are turned into spaces, so the Lua interpreter sees
+them is that ends-of-lines are turned into spaces, so the Lua interpreter sees
 only one (long) line of input. Since Lua is a free-form language, it doesn't
 usually matter, but it does if you use comments:
 \begin{Verbatim}
@@ -285,8 +285,8 @@ correct version of the previous example.
     another_function()}
 \end{Verbatim}
 It is also worth noticing that, since the argument basically is inside a
-©\write©, it's in expansion-only context. If you don't know what it means, let
-me say that expansion issues are mostly what makes \tex programming so
+©\write©, it's in an expansion-only context. If you don't know what that means,
+let me say that expansion issues are mostly what makes \tex programming so
 difficult to avoid expanding further on that matter.
 
 \medskip
@@ -303,10 +303,10 @@ debugging trick. Put the following code near the beginning of your document:
 Then, when you have a hard time understanding why a particular call to
 ©\directlua© doesn't do what you expect, replace this instance of the command
 with ©\directluadebug©, compile as usual and look in the file
-\file{luadebug.lua} produced what the Lua interpreter actually read.
+\file{luadebug.lua} to see what the Lua interpreter actually read.
 
 The \pk{luacode} package provides commands and environments that help to
-varying degrees with some of these problems. Hoewever, for everything but
+varying degrees with some of these problems. However, for everything but
 trivial pieces of Lua code, it is wiser to use an external file containing
 only Lua code defining functions, then load it and use its functions. For
 example:
@@ -383,7 +383,7 @@ A simple and modern replacement for Babel, working in synergy with \pk{fontspec}
 On the \tex end, control sequences starting with ©\luatex© are reserved for
 primitives. It is strongly recommended that you do \emph{not} define any such
 control sequence, to prevent name clashes with future versions of \luatex. If
-you want to a emphasize that a macro is specific to \luatex, we recommend that
+you want to emphasize that a macro is specific to \luatex, we recommend that
 you use the ©\lua© prefix (without a following ©tex©) instead. It is okay to
 use the ©\luatex@© prefix for internal macros, since primitive names never
 contain ©@©, but it might be confusing. Moreover, you're already using a
@@ -420,21 +420,22 @@ Amongst \emph{many} other things, provides ©\luatex_if_engine:TF©,
 \pkdesc{ifpdf}{\HO}{all}{\latex, Plain}{%
   macros/latex/contrib/oberdiek/}
 Provides ©\ifpdf© switch. \luatex, like \pdftex, can produce either PDF or DVI
-output; the later is not very useful with \luatex as it doesn't support any
-advanced feature such as Unicode and modern font formats. The ©\ifpdf© switch
-is true if and only if you are running \pdftex-or-\luatex in PDF mode (note
-that this doesn't include \xetex, whose support for PDF is different).
+output; the latter is not very useful with \luatex as it doesn't support any
+advanced features such as Unicode and modern font formats. The ©\ifpdf© switch
+is true if and only if you are running \pdftex or \luatex and generating a PDF
+file (note that this doesn't include \xetex, whose support for PDF is
+different).
 
 \subsubsection{Basic resources}
 
 \pkdesc{luatexbase}{\ER, \MPG \& \PHG}{\luatex}{\latex, Plain}{%
   macros/luatex/generic/luatexbase/}[https://github.com/lualatex/luatexbase]
-The Plain and \latex formats provide macros to manage \tex basic resources,
+The Plain and \latex formats provide macros to manage basic \tex resources,
 such as count or box registers. \luatex introduces new resources that need to
 be shared gracefully by packages. This package provides the basic tools to
 manage: the extended conventional \tex resources, catcode tables, attributes,
 callbacks, Lua modules loading and identification. It also provides basic
-tools to handle a few compatibility issues with older version of \luatex.
+tools to handle a few compatibility issues with older versions of \luatex.
 
 \note{Warning} This package is currently in conflict with the \pk{luatex}
 package, since they both do almost the same thing. The respective package
@@ -454,7 +455,7 @@ doesn't provide, check this package before rolling your own implementation.
 
 \subsubsection{Font internals}\label{fontint}
 
-Those packages are loaded by \pk{fontspec} to handle some low-level font and
+These packages are loaded by \pk{fontspec} to handle some low-level font and
 encoding issues. A normal user should only use \pk{fontspec}, but a developer
 may need to know about them.
 
@@ -513,8 +514,8 @@ Provides a nice interface for the ©mplib© Lua library that embeds metapost in
 
 \pkdesc{luacolor}{\HO}{\luatex}{\latex}{%
   macros/latex/contrib/oberdiek/}
-Changes low-level color implementation to use \luatex attributes in place of
-whatsits. This makes the implementation more robust and fixes strange bugs
+Changes the low-level color implementation to use \luatex attributes in place
+of whatsits. This makes the implementation more robust and fixes strange bugs
 such as wrong alignment when ©\color© happens at the beginning of a ©\vbox©.
 
 \subsection{Developer-level}
@@ -529,7 +530,7 @@ recently implemented some of these primitives, such as ©\strcmp©.
 \pkdesc{magicnum}{\HO}{\luatex, \pdftex, \xetex}{\latex, Plain}{%
   macros/latex/contrib/oberdiek/}
 Provides hierarchical access to ``magic numbers'' such as catcodes, group
-types, etc. used internally by \tex and its successors. Under \luatex, a more
+types, etc.\ used internally by \tex and its successors. Under \luatex, a more
 efficient implementation is used and a Lua interface is provided.
 
 \pkdesc{lua-alt-getopt}{Aleksey Cheusov}{\cmd{texlua}}{command-line}{%
@@ -541,7 +542,7 @@ used in command-line Lua scripts such as \cmd{luaotfload-tool} from
 \section{The \cmd{luatex} and \cmd{lualatex} formats}\label{formats}
 
 This section is for developers and curious users only; normal users can safely
-skip it. The following information apply to \texlive 2010, and most likely to
+skip it. The following information applies to \texlive 2010, and most likely to
 \miktex 2.9 too, though I didn't actually check. Earlier versions of \texlive
 had slightly different and less complete arrangements.
 
@@ -621,8 +622,8 @@ on the \luatex mailing lists, and \file{lualatexquotejobname.tex} for the
 implementation of the workaround.
 
 \para{hyphenation}
-\luatex offers dynamic loading for hyphenation patterns. The support for this in
-\pf{babel} and \pf{polyglossia} appeared only on \texlive 2013, but should
+\luatex offers dynamic loading of hyphenation patterns. The support for this in
+\pf{babel} and \pf{polyglossia} appeared only in \texlive 2013, but should
 work well since then.
 
 Documentation and implementation details are included in
@@ -682,7 +683,7 @@ already took care of it.
 
 \para{encodings}
 As mentioned in the above section, a few things that were problematic with
-UTF-8 on conventional \latex spontaneously works, but not always. For example,
+UTF-8 on conventional \latex spontaneously work, but not always. For example,
 with the \pf{listings} package on \lualatex, you may use only characters below
 256 (that is, characters from the Latin-1 set), inside your listings (but of
 course the full Unicode range is still available in the rest of your
@@ -697,8 +698,8 @@ They may be due variations between two versions of the same font used by the
 various engines, adjustments made to the hyphenation, ligaturing or kerning
 algorithms (or example, the first word of a paragraph, as well as words
 containing different fonts, can now be hyphenated), or differences in the
-hyphenation patterns used (patterns used by \pdftex are basically frozen, but
-\luatex and \xetex use newer version for some languages) for this language.
+hyphenation patterns used for this language (the patterns used by \pdftex are
+basically frozen, but \luatex and \xetex use newer versions for some languages).
 
 If you ever observe a major difference between pdf\latex and \lualatex with
 the same fonts, it is not at all unlikely that a bug in \luatex\footnote{For
